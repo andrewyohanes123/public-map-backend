@@ -6,14 +6,17 @@ import nocache from 'nocache';
 import cors from 'cors';
 import path from 'path';
 import http from 'http';
+import fs from 'fs'
 import socketio from 'socket.io';
 import _ from 'lodash';
+import sharp from 'sharp'
 
 import ModelFactoryInterface from './models/typings/ModelFactoryInterface';
 import createModels from './models';
 import createRoutes, { SiriusRouter } from './routes';
 import tokenMiddleware from './middlewares/pipes/token';
 import websocket from './websocket';
+import NotFoundError from './classes/NotFoundError';
 
 /** import .env file configuration */
 dotenv.config();
@@ -55,10 +58,10 @@ routes.forEach((route: SiriusRouter) => {
 			let verbs: any = route.methods.get
 				? 'GET'
 				: route.methods.post
-				? 'POST'
-				: route.methods.put
-				? 'PUT'
-				: 'DELETE';
+					? 'POST'
+					: route.methods.put
+						? 'PUT'
+						: 'DELETE';
 			let keys: any = info.keys.map((t: any) => t.name);
 			routeData[key].endpoints.push({ endpoint, verbs, keys });
 		}
@@ -88,6 +91,21 @@ app.get(
 		res.json(data);
 	},
 );
+
+app.get('/icon/:id', async (req: express.Request, res: express.Response): Promise<void> => {
+	const type = await models.Type.findById(req.params.id);
+	if (type) {
+		// sharp(path.resolve(__dirname, 'icons', type.icon)).png().toFile(path.resolve(__dirname, 'icons', `temp${type.id}.png`)).then(resp => {
+			const base64 = fs.readFileSync(path.resolve(__dirname, 'icons', `${type.icon}`), 'base64');
+			// console.log(resp)
+			// res.sendFile(path.resolve(__dirname, 'icons', `temp${type.id}.png`))
+			res.send({ data: base64 });
+		// })
+	} else {
+		throw new NotFoundError('errno');
+	}
+	// res.sendFile()
+});
 
 /** root route */
 if (process.env.NODE_ENV === 'development') {

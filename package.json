@@ -13,7 +13,10 @@
     "dev": "node ./node_modules/nodemon/bin/nodemon.js",
     "postinstall": "ts-node ./scripts/postinstall.ts",
     "route:create": "ts-node ./scripts/route.create.ts",
-    "db:clean": "ts-node ./scripts/db.clean.ts"
+    "db:clean": "ts-node ./scripts/db.clean.ts",
+    "default:user": "ts-node ./scripts/user.default.ts",
+    "default:types": "ts-node ./scripts/default.types.ts",
+    "generate:points": "ts-node ./scripts/generate.points.ts"
   },
   "author": "",
   "license": "ISC",
@@ -25,6 +28,7 @@
     "dotenv": "^6.1.0",
     "express": "^4.16.4",
     "express-validator": "^5.3.0",
+    "faker": "^5.5.3",
     "inquirer": "^7.0.0",
     "jsonwebtoken": "^8.4.0",
     "lodash": "^4.17.11",
@@ -34,6 +38,7 @@
     "pg": "8",
     "pluralize": "^8.0.0",
     "sequelize": "^4.41.2",
+    "sharp": "^0.28.1",
     "socket.io": "^2.2.0",
     "typescript": "^3.2.1"
   },
@@ -48,6 +53,7 @@
     "@types/jsonwebtoken": "^8.3.0",
     "@types/pluralize": "^0.0.29",
     "@types/sequelize": "^4.27.32",
+    "@types/sharp": "^0.28.0",
     "@types/socket.io": "^2.1.2",
     "nodemon": "^1.18.7",
     "prettier": "^1.17.0",
