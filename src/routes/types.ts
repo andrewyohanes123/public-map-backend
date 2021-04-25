@@ -9,6 +9,8 @@ import sequelize from 'sequelize';
 import { Parser } from '../helpers/Parser';
 import NotFoundError from '../classes/NotFoundError';
 import { TypeInstance, TypeAttributes } from '../models/Type';
+import { writeFileSync, existsSync, mkdirSync } from 'fs'
+import { resolve } from 'path'
 
 const typesRoutes: Routes = (
     app: express.Application,
@@ -53,7 +55,13 @@ const typesRoutes: Routes = (
         a(
             async (req: express.Request, res: express.Response): Promise<void> => {
                 const attributes: TypeAttributes = req.body;
+                const iconsFolderExists: boolean = existsSync(resolve(__dirname, '..', 'icons'));
+                if (!iconsFolderExists) mkdirSync(resolve(__dirname, '..', 'icons'));
+                const b64: string[] = attributes.icon.split(',');
+                const fileName = `${attributes.name.toLocaleLowerCase().replace(/\s/g, '')}.svg`;
+                attributes.icon = fileName;
                 const type: TypeInstance = await models.Type.create(attributes);
+                writeFileSync(resolve(__dirname, '..', 'icons', fileName), b64.length > 1 ? b64[1] : b64[0], 'base64');
                 const body: OkResponse = { data: type };
 
                 res.json(body);
@@ -97,4 +105,3 @@ const typesRoutes: Routes = (
 };
 
 export default typesRoutes;
-    
