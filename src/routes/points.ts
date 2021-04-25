@@ -38,7 +38,11 @@ const pointsRoutes: Routes = (
         a(
             async (req: express.Request, res: express.Response): Promise<void> => {
                 const { id }: any = req.params;
-                const point: PointInstance | null = await models.Point.findByPk(id);
+                const point: PointInstance | null = await models.Point.findByPk(id, {
+                    include: [
+                        {model: models.Type}
+                    ]
+                });
                 if (!point) throw new NotFoundError('Point tidak ditemukan');
                 const body: OkResponse = { data: point };
 
