@@ -9,6 +9,9 @@ import sequelize from 'sequelize';
 import { Parser } from '../helpers/Parser';
 import NotFoundError from '../classes/NotFoundError';
 import { PictureInstance, PictureAttributes } from '../models/Picture';
+import path from 'path'
+import fs from 'fs'
+import sharp from 'sharp'
 
 const picturesRoutes: Routes = (
     app: express.Application,
@@ -53,7 +56,16 @@ const picturesRoutes: Routes = (
         a(
             async (req: express.Request, res: express.Response): Promise<void> => {
                 const attributes: PictureAttributes = req.body;
-                const picture: PictureInstance = await models.Picture.create(attributes);
+                const b64: string[] = attributes.file.split(',');
+                const date = new Date();
+                const fileBuffer = Buffer.from(b64[1], 'base64');
+                if (!fs.existsSync(path.resolve(__dirname, '..', '..', 'uploads'))) fs.mkdirSync(path.resolve(__dirname, '..', '..', 'uploads'));
+                const fileName: string = `${attributes.point_id}.${date.toISOString().replace(/[\-\:\.]/g, '')}.jpg`
+                await sharp(fileBuffer).jpeg({quality: 60}).toFile(path.resolve(__dirname, '..', '..', 'uploads', fileName));
+                const picture: PictureInstance = await models.Picture.create({
+                    ...attributes,
+                    file: fileName,                
+                });
                 const body: OkResponse = { data: picture };
 
                 res.json(body);

@@ -107,6 +107,16 @@ app.get('/icon/:id', async (req: express.Request, res: express.Response): Promis
 	// res.sendFile()
 });
 
+app.get('/picture/:id', async (req: express.Request, res: express.Response): Promise<void> => {
+	const picture = await models.Picture.findById(req.params.id);
+	if (picture) {
+			res.sendFile(path.resolve(__dirname, '..', 'uploads', `${picture.file}`));
+	} else {
+		throw new NotFoundError('errno');
+	}
+	// res.sendFile()
+});
+
 /** root route */
 if (process.env.NODE_ENV === 'development') {
 	app.use(express.static(path.resolve(__dirname, '..', 'inspector')));
