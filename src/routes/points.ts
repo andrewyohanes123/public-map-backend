@@ -40,7 +40,8 @@ const pointsRoutes: Routes = (
                 const { id }: any = req.params;
                 const point: PointInstance | null = await models.Point.findByPk(id, {
                     include: [
-                        {model: models.Type}
+                        {model: models.Type},
+                        {model: models.Picture}
                     ]
                 });
                 if (!point) throw new NotFoundError('Point tidak ditemukan');
