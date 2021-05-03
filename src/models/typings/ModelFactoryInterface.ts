@@ -4,6 +4,8 @@ import { TokenInstance, TokenAttributes } from '../Token';
 import { PointAttributes, PointInstance } from '../Point';
 import { PictureAttributes, PictureInstance } from '../Picture';
 import { TypeAttributes, TypeInstance } from '../Type';
+import { RegionAttributes, RegionInstance } from '../Region';
+import { LayerAttributes, LayerInstance } from '../Layer';
 
 interface Obj {
 	[s: string]: any;
@@ -17,4 +19,6 @@ export default interface ModelFactoryInterface extends Obj {
 	Point: Sequelize.Model<PointInstance, PointAttributes>;
 	Picture: Sequelize.Model<PictureInstance, PictureAttributes>;
 	Type: Sequelize.Model<TypeInstance, TypeAttributes>;
+	Region: Sequelize.Model<RegionInstance, RegionAttributes>;
+	Layer: Sequelize.Model<LayerInstance, LayerAttributes>;
 }

@@ -5,6 +5,8 @@ import { TokenFactory } from './Token';
 import { PointFactory } from './Point';
 import { PictureFactory } from './Picture';
 import { TypeFactory } from './Type';
+import { RegionFactory } from './Region';
+import { LayerFactory } from './Layer';
 
 const createModels: Function = (): ModelFactoryInterface => {
 	const {
@@ -31,7 +33,9 @@ const createModels: Function = (): ModelFactoryInterface => {
 		Token: TokenFactory(sequelize, Sequelize),
 		Point: PointFactory(sequelize, Sequelize),
 		Picture: PictureFactory(sequelize, Sequelize),
-		Type: TypeFactory(sequelize, Sequelize)
+		Type: TypeFactory(sequelize, Sequelize),
+		Region: RegionFactory(sequelize, Sequelize),
+		Layer: LayerFactory(sequelize, Sequelize)
 	};
 
 	Object.keys(db).forEach(

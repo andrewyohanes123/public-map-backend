@@ -117,6 +117,10 @@ app.get('/picture/:id', async (req: express.Request, res: express.Response): Pro
 	// res.sendFile()
 });
 
+app.get('/map/base', (req: express.Request, res: express.Response): void => {
+	res.sendFile(path.resolve(__dirname, '..', 'basemaps', 'empty.geojson'));
+});
+
 /** root route */
 if (process.env.NODE_ENV === 'development') {
 	app.use(express.static(path.resolve(__dirname, '..', 'inspector')));
