@@ -29,6 +29,7 @@
     "express": "^4.16.4",
     "express-validator": "^5.3.0",
     "faker": "^5.5.3",
+    "geojson-vt": "^3.2.1",
     "inquirer": "^7.0.0",
     "jsonwebtoken": "^8.4.0",
     "lodash": "^4.17.11",

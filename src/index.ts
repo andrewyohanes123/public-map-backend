@@ -9,7 +9,8 @@ import http from 'http';
 import fs from 'fs'
 import socketio from 'socket.io';
 import _ from 'lodash';
-import sharp from 'sharp'
+// @ts-ignore
+import geojsonvt from 'geojson-vt'
 
 import ModelFactoryInterface from './models/typings/ModelFactoryInterface';
 import createModels from './models';
@@ -118,7 +119,11 @@ app.get('/picture/:id', async (req: express.Request, res: express.Response): Pro
 });
 
 app.get('/map/base', (req: express.Request, res: express.Response): void => {
-	res.sendFile(path.resolve(__dirname, '..', 'basemaps', 'empty.geojson'));
+	// const {x, y, z}: any = req.params;
+	// const json = fs.readFileSync(path.resolve(__dirname, '..', 'basemaps', 'empty.json'));
+	// const tile = geojsonvt(json);
+	// const vt = tile.getTile(z, x, y).features;
+	res.send(fs.readFileSync(path.resolve(__dirname, '..', 'basemaps', 'empty.json')));
 });
 
 /** root route */
