@@ -23,7 +23,7 @@ const createModels: Function = (): ModelFactoryInterface => {
 			useUTC: true,
 		},
 		timezone: '+08:00',
-		operatorsAliases: false,
+		operatorsAliases: true,
 		logging: process.env.SYSTEM_LOGGING === 'true' ? console.log : (msg: string) => {},
 	});
 	const db: ModelFactoryInterface = {
