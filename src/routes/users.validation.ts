@@ -44,12 +44,5 @@ export const editUser: express.Handler[] = wrapValidation(
 				negated: true,
 			},
 		},
-		password: {
-			in: 'body',
-			isEmpty: {
-				errorMessage: 'Password harus diisi',
-				negated: true,
-			},
-		},
 	}),
 );

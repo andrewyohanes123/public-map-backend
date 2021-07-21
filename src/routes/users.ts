@@ -85,10 +85,15 @@ const usersRoute: Routes = (
 					name,
 					username,
 					password,
-				}: { name: string; username: string; password: string } = req.body;
+					type
+				}: { name: string; username: string; password?: string, type: 'Contributor' | 'Administrator' } = req.body;
 				const user: UserInstance | null = await models.User.findOne({ where: { id } });
 				if (!user) throw new NotFoundError('User tidak ditemukan');
-				await user.update({ name, username, password: bcrypt.hashSync(password, 10) });
+				if (typeof password !== 'undefined') {
+					await user.update({ name, username, password: bcrypt.hashSync(password, 10), type });
+				} else {
+					await user.update({ name, username, type });
+				}
 				const body: OkResponse = { data: user };
 
 				res.json(body);
