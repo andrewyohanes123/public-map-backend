@@ -8,6 +8,7 @@ export interface PointAttributes {
 	name: string;
   longitude: number;
   latitude: number;
+	surface_area: number;
   type_id?: number;
   user_id?: number;
   description?: string;
@@ -42,7 +43,11 @@ export const PointFactory: Factory<PointInstance, PointAttributes> = (
     description: {
       type: DataTypes.TEXT,
       allowNull: true
-    }
+    },
+		surface_area: {
+			type: DataTypes.INTEGER(32),
+			allowNull: false
+		}
 	};
 	const Point: Sequelize.Model<PointInstance, PointAttributes> = sequelize.define<
 		PointInstance,
@@ -53,6 +58,7 @@ export const PointFactory: Factory<PointInstance, PointAttributes> = (
 		Point.hasMany(models.Picture, { onDelete: 'cascade' });
 		Point.belongsTo(models.Type, { onDelete: 'cascade' });
 		Point.belongsTo(models.User, { onDelete: 'cascade' });
+		Point.hasMany(models.MangroveAmount, { onDelete: 'cascade' });
 	};
 
 	return Point;

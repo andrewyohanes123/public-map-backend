@@ -6,6 +6,8 @@ import { PictureAttributes, PictureInstance } from '../Picture';
 import { TypeAttributes, TypeInstance } from '../Type';
 import { RegionAttributes, RegionInstance } from '../Region';
 import { LayerAttributes, LayerInstance } from '../Layer';
+import { MangroveTypeAttributes, MangroveTypeInstance } from '../MangroveType';
+import { MangroveAmountAttributes, MangroveAmountInstance } from '../MangroveAmount';
 
 interface Obj {
 	[s: string]: any;
@@ -21,4 +23,6 @@ export default interface ModelFactoryInterface extends Obj {
 	Type: Sequelize.Model<TypeInstance, TypeAttributes>;
 	Region: Sequelize.Model<RegionInstance, RegionAttributes>;
 	Layer: Sequelize.Model<LayerInstance, LayerAttributes>;
+	MangroveType: Sequelize.Model<MangroveTypeInstance, MangroveTypeAttributes>;
+	MangroveAmount: Sequelize.Model<MangroveAmountInstance, MangroveAmountAttributes>;
 }

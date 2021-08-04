@@ -18,6 +18,7 @@ export interface ICollectionOptions {
 
 interface ICollectionIncludeOptions extends ICollectionOptions {
 	model: string;
+	required?: boolean;
 }
 
 export class Parser {
@@ -52,7 +53,8 @@ export class Parser {
 					offset: m.offset,
 					order: m.order,
 					include: this.buildIncludes(m.include, models),
-					as: m.as
+					as: m.as,
+					required: m.required
 			  }))
 			: [];
 	}
