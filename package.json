@@ -16,7 +16,8 @@
     "db:clean": "ts-node ./scripts/db.clean.ts",
     "default:user": "ts-node ./scripts/user.default.ts",
     "default:types": "ts-node ./scripts/default.types.ts",
-    "generate:points": "ts-node ./scripts/generate.points.ts"
+    "generate:points": "ts-node ./scripts/generate.points.ts",
+    "fill:districts": "ts-node ./scripts/fill.districts.ts"
   },
   "author": "",
   "license": "ISC",

@@ -9,6 +9,7 @@ import { RegionFactory } from './Region';
 import { LayerFactory } from './Layer';
 import { MangroveAmountFactory } from './MangroveAmount';
 import { MangroveTypeFactory } from './MangroveType';
+import { DistrictFactory } from './District';
 
 const createModels: Function = (): ModelFactoryInterface => {
 	const {
@@ -39,7 +40,8 @@ const createModels: Function = (): ModelFactoryInterface => {
 		Region: RegionFactory(sequelize, Sequelize),
 		Layer: LayerFactory(sequelize, Sequelize),
 		MangroveAmount: MangroveAmountFactory(sequelize, Sequelize),
-		MangroveType: MangroveTypeFactory(sequelize, Sequelize)
+		MangroveType: MangroveTypeFactory(sequelize, Sequelize),
+		District: DistrictFactory(sequelize, Sequelize)
 	};
 
 	Object.keys(db).forEach(

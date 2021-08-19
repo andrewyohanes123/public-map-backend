@@ -10,6 +10,7 @@ export interface PointAttributes {
   latitude: number;
 	surface_area: number;
   type_id?: number;
+	point_id?: number;
   user_id?: number;
   description?: string;
   created_at?: Date;
@@ -57,6 +58,7 @@ export const PointFactory: Factory<PointInstance, PointAttributes> = (
 	Point.associate = (models: ModelFactoryInterface): void => {
 		Point.hasMany(models.Picture, { onDelete: 'cascade' });
 		Point.belongsTo(models.Type, { onDelete: 'cascade' });
+		Point.belongsTo(models.District, { onDelete: 'cascade' });
 		Point.belongsTo(models.User, { onDelete: 'cascade' });
 		Point.hasMany(models.MangroveAmount, { onDelete: 'cascade' });
 	};

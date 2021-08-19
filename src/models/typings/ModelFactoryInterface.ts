@@ -8,6 +8,7 @@ import { RegionAttributes, RegionInstance } from '../Region';
 import { LayerAttributes, LayerInstance } from '../Layer';
 import { MangroveTypeAttributes, MangroveTypeInstance } from '../MangroveType';
 import { MangroveAmountAttributes, MangroveAmountInstance } from '../MangroveAmount';
+import { DistrictAttributes, DistrictInstance } from '../District';
 
 interface Obj {
 	[s: string]: any;
@@ -25,4 +26,5 @@ export default interface ModelFactoryInterface extends Obj {
 	Layer: Sequelize.Model<LayerInstance, LayerAttributes>;
 	MangroveType: Sequelize.Model<MangroveTypeInstance, MangroveTypeAttributes>;
 	MangroveAmount: Sequelize.Model<MangroveAmountInstance, MangroveAmountAttributes>;
+	District: Sequelize.Model<DistrictInstance, DistrictAttributes>;
 }
