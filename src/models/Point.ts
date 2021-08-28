@@ -6,8 +6,9 @@ import ModelFactoryInterface from './typings/ModelFactoryInterface';
 export interface PointAttributes {
 	id?: number;
 	name: string;
-  longitude: number;
-  latitude: number;
+  type: string;
+	properties: {[any: string]: any};
+	geometry: {[any: string]: any};
 	surface_area: number;
   type_id?: number;
 	point_id?: number;
@@ -33,14 +34,18 @@ export const PointFactory: Factory<PointInstance, PointAttributes> = (
 			type: DataTypes.STRING(191),
 			allowNull: false,
 		},
-    longitude: {
-      type: DataTypes.FLOAT,
-      allowNull: false
-    },
-    latitude: {
-      type: DataTypes.FLOAT,
-      allowNull: false
-    },
+		type: {
+			type: DataTypes.STRING(191),
+			allowNull: false,
+		},
+		properties: {
+			type: DataTypes.JSONB,
+			allowNull: false
+		},
+		geometry: {
+			type: DataTypes.JSONB,
+			allowNull: false
+		},
     description: {
       type: DataTypes.TEXT,
       allowNull: true
