@@ -6,7 +6,7 @@ import ModelFactoryInterface from './typings/ModelFactoryInterface';
 export interface PointAttributes {
 	id?: number;
 	name: string;
-  type: string;
+  pointType: string;
 	properties: {[any: string]: any};
 	geometry: {[any: string]: any};
 	surface_area: number;
@@ -34,7 +34,7 @@ export const PointFactory: Factory<PointInstance, PointAttributes> = (
 			type: DataTypes.STRING(191),
 			allowNull: false,
 		},
-		type: {
+		pointType: {
 			type: DataTypes.STRING(191),
 			allowNull: false,
 		},
