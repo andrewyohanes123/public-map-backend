@@ -55,6 +55,7 @@ const typesRoutes: Routes = (
         a(
             async (req: express.Request, res: express.Response): Promise<void> => {
                 const attributes: TypeAttributes = req.body;
+                console.log({attributes});
                 const iconsFolderExists: boolean = existsSync(resolve(__dirname, '..', 'icons'));
                 if (!iconsFolderExists) mkdirSync(resolve(__dirname, '..', 'icons'));
                 const b64: string[] = attributes.icon.split(',');
